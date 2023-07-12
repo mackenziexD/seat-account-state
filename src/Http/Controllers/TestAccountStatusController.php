@@ -62,13 +62,10 @@ class TestAccountStatusController extends Controller
                 ->first();
     
             $skillIsTraining = !is_null($currentlyTrainingSkill);
-            echo ("Skill is training: " . ($skillIsTraining ? 'true' : 'false') . "\n");
     
             if ($skillIsTraining && $characterSkills->sum('skillpoints_in_skill') > EveConstants::MAX_ALPHA_SKILL_TRAINING) {
-                echo ("Skill is training and total SP is greater than max alpha training SP\n");
                 $status = 'Omega';
             } else {
-                echo ("Skill is not training or total SP is less than max alpha training SP\n");
                 $likelyAlpha = false;
                 foreach ($characterSkills as $skill) {
                     // Is the skill level being limited by alpha status?
@@ -78,7 +75,7 @@ class TestAccountStatusController extends Controller
                     }
                     // Has the skill alpha limit been exceeded?
                     foreach ($data as $cloneState) {
-                        dd($cloneState['skills']);
+                        if(!array_key_exists($skill->skill_id, $cloneState['skills'])) continue;
                         if (is_array($cloneState['skills']) && $skill->active_skill_level > $cloneState['skills'][$skill->skill_id] ?? 0) {
                             // Active level is greater than alpha limit, only on Omega.
                             $status = 'Omega';
