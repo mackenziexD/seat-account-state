@@ -19,7 +19,7 @@ class TestAccountStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BeaconsDataTable $dataTable)
+    public function index()
     {
         dd($this->updateAccountStatus(94154296));
     }
