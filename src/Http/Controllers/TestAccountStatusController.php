@@ -36,8 +36,8 @@ class TestAccountStatusController extends Controller
      */
     public function index()
     {
-        $this->updateAccountStatus(2115150305);
-        dd('done');
+        $acountStatus = $this->updateAccountStatus(2115150305);
+        dd($acountStatus);
     }
 
     function updateAccountStatus($characterId, $status = 'Unknown') {
