@@ -29,8 +29,6 @@ class EveConstants {
 class TestAccountStatusController extends Controller
 {
 
-    
-
     /**
      * Show the eligibility checker.
      *
@@ -80,6 +78,7 @@ class TestAccountStatusController extends Controller
                     }
                     // Has the skill alpha limit been exceeded?
                     foreach ($data as $cloneState) {
+                        dd($cloneState['skills']);
                         if (is_array($cloneState['skills']) && $skill->active_skill_level > $cloneState['skills'][$skill->skill_id] ?? 0) {
                             // Active level is greater than alpha limit, only on Omega.
                             $status = 'Omega';
