@@ -3,7 +3,7 @@
 Route::group([
 
     'namespace' => 'Helious\SeatAccountStatus\Http\Controllers',
-    'prefix' => 'test',
+    'prefix' => 'account-status',
     'middleware' => [
         'web',
         'auth'
@@ -11,7 +11,7 @@ Route::group([
 ], function()
 {
 
-    Route::get('/account-status', [
+    Route::get('/{character_id}', [
         'uses' => 'TestAccountStatusController@index',
         'as' => 'seat-account-status::index',
     ]);
