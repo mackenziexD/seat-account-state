@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Seat\Eveapi\Models\Character\CharacterSkill;
 use Seat\Eveapi\Models\Skills\CharacterSkillQueue;
 use Seat\Eveapi\Models\Skills\CharacterAttribute;
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class TestAccountStatusController extends Controller
 {
@@ -25,13 +25,16 @@ class TestAccountStatusController extends Controller
     }
 
     function updateAccountStatus($characterId, $status = 'Unknown') {
+        /// Create a new Guzzle client
+        $client = new Client();
+
         // Fetch the JSON data
-        $response = Http::get('http://sde.hoboleaks.space/tq/clonestates.json');
-    
+        $response = $client->request('GET', 'http://sde.hoboleaks.space/tq/clonestates.json');
+
         // Check that the request was successful
-        if ($response->successful()) {
+        if ($response->getStatusCode() == 200) {
             // Decode the JSON data into an associative array
-            $data = $response->json();
+            $data = json_decode($response->getBody(), true);
     
             // Get the character's skills
             $characterSkills = CharacterSkill::where('character_id', $characterId)->get();
