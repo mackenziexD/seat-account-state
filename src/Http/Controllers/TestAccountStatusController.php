@@ -38,7 +38,8 @@ class TestAccountStatusController extends Controller
      */
     public function index()
     {
-        dd($this->updateAccountStatus(94154296));
+        $this->updateAccountStatus(2115150305);
+        dd('done');
     }
 
     function updateAccountStatus($characterId, $status = 'Unknown') {
@@ -63,10 +64,13 @@ class TestAccountStatusController extends Controller
                 ->first();
     
             $skillIsTraining = !is_null($currentlyTrainingSkill);
+            echo ("Skill is training: " . ($skillIsTraining ? 'true' : 'false') . "\n");
     
             if ($skillIsTraining && $characterSkills->sum('skillpoints_in_skill') > EveConstants::MAX_ALPHA_SKILL_TRAINING) {
+                echo ("Skill is training and total SP is greater than max alpha training SP\n");
                 $status = 'Omega';
             } else {
+                echo ("Skill is not training or total SP is less than max alpha training SP\n");
                 $likelyAlpha = false;
                 foreach ($characterSkills as $skill) {
                     // Is the skill level being limited by alpha status?
