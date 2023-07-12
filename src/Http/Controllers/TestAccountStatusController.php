@@ -12,8 +12,25 @@ use Seat\Eveapi\Models\Skills\CharacterSkillQueue;
 use Seat\Eveapi\Models\Skills\CharacterAttribute;
 use GuzzleHttp\Client;
 
+class EveConstants {
+    const SPARE_ATTRIBUTE_POINTS_ON_REMAP = 14;
+    const CHARACTER_BASE_ATTRIBUTE_POINTS = 17;
+    const MAX_REMAPPABLE_POINTS_PER_ATTRIBUTE = 10;
+    const MAX_IMPLANT_POINTS = 5;
+    const DOWNTIME_HOUR = 11;
+    const DOWNTIME_DURATION = 30;
+    const TRANSACTION_TAX_BASE = 0.05;
+    const BROKER_FEE_BASE = 0.05;
+    const MAX_SKILLS_IN_QUEUE = 50;
+    const MAX_ALPHA_SKILL_TRAINING = 5000000;
+    const REGION_RANGE = 32767;
+}
+
 class TestAccountStatusController extends Controller
 {
+
+    
+
     /**
      * Show the eligibility checker.
      *
